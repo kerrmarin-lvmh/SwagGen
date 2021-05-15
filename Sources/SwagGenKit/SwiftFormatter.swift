@@ -73,12 +73,12 @@ open class SwiftFormatter: CodeFormatter {
 
     let fixedWidthIntegers: Bool
 
-    public override init(spec: SwaggerSpec, templateConfig: TemplateConfig) {
+    override public init(spec: SwaggerSpec, templateConfig: TemplateConfig) {
         fixedWidthIntegers = templateConfig.getBooleanOption("fixedWidthIntegers") ?? false
         super.init(spec: spec, templateConfig: templateConfig)
     }
 
-    override public func getSchemaType(name: String, schema: Schema, checkEnum: Bool = true) -> String {
+    override open func getSchemaType(name: String, schema: Schema, checkEnum: Bool = true) -> String {
 
         var enumValue: String?
         if checkEnum {
@@ -165,7 +165,7 @@ open class SwiftFormatter: CodeFormatter {
         }
     }
 
-    override public func getSchemaContext(_ schema: Schema) -> Context {
+    override open func getSchemaContext(_ schema: Schema) -> Context {
         var context = super.getSchemaContext(schema)
 
         if let objectSchema = schema.type.object,
@@ -176,7 +176,7 @@ open class SwiftFormatter: CodeFormatter {
         return context
     }
 
-    override public func getParameterContext(_ parameter: Parameter) -> Context {
+    override open func getParameterContext(_ parameter: Parameter) -> Context {
         var context = super.getParameterContext(parameter)
 
         let type = context["type"] as! String
@@ -201,7 +201,7 @@ open class SwiftFormatter: CodeFormatter {
         return context
     }
 
-    override func getRequestBodyContext(_ requestBody: PossibleReference<RequestBody>) -> Context {
+    override open func getRequestBodyContext(_ requestBody: PossibleReference<RequestBody>) -> Context {
         var context = super.getRequestBodyContext(requestBody)
         let type = context["type"] as! String
         context["optionalType"] = type + (requestBody.value.required ? "" : "?")
@@ -226,7 +226,7 @@ open class SwiftFormatter: CodeFormatter {
         return encodedValue
     }
 
-    override public func getPropertyContext(_ property: Property) -> Context {
+    override open func getPropertyContext(_ property: Property) -> Context {
         var context = super.getPropertyContext(property)
 
         let type = context["type"] as! String
@@ -244,7 +244,7 @@ open class SwiftFormatter: CodeFormatter {
         return context
     }
 
-    override public func getResponseContext(_ response: OperationResponse) -> Context {
+    override open func getResponseContext(_ response: OperationResponse) -> Context {
         var context = super.getResponseContext(response)
         let type = context["type"] as? String ?? ""
         context["isAnyType"] = type.contains("Any")

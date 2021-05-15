@@ -35,7 +35,7 @@ open class CodeFormatter {
         return []
     }
 
-    public func getContext() -> [String: Any] {
+    open func getContext() -> [String: Any] {
         return getSpecContext().clean()
     }
 
@@ -67,7 +67,7 @@ open class CodeFormatter {
         return (value1[by] as? String ?? "") < (value2[by] as? String ?? "")
     }
 
-    public func getServerContext(index: Int, server: Server) -> Context {
+    open func getServerContext(index: Int, server: Server) -> Context {
         var context: Context = [:]
         let defaultName = index == 0 ? "main" : "server\(index + 1)"
         context["name"] = getName(server.name?.lowercased() ?? defaultName)
@@ -85,7 +85,7 @@ open class CodeFormatter {
         return context
     }
 
-    public func getSecuritySchemeContext(_ securityScheme: ComponentObject<SecurityScheme>) -> Context {
+    open func getSecuritySchemeContext(_ securityScheme: ComponentObject<SecurityScheme>) -> Context {
         var context: Context = [:]
 
         context["name"] = securityScheme.name
@@ -94,7 +94,7 @@ open class CodeFormatter {
         return context
     }
 
-    public func getSpecInformationContext(_ info: Info) -> Context {
+    open func getSpecInformationContext(_ info: Info) -> Context {
         var context: Context = [:]
 
         context["title"] = info.title.description
@@ -104,7 +104,7 @@ open class CodeFormatter {
         return context
     }
 
-    public func getSchemaContent(_ schema: ComponentObject<Schema>) -> Context {
+    open func getSchemaContent(_ schema: ComponentObject<Schema>) -> Context {
         var context = getSchemaContext(schema.value)
 
         context["type"] = getSchemaTypeName(schema)
@@ -139,7 +139,7 @@ open class CodeFormatter {
         }
     }
 
-    public func getInlineSchemaContext(_ schema: Schema, name: String) -> Context? {
+    open func getInlineSchemaContext(_ schema: Schema, name: String) -> Context? {
         guard let schema = schema.inlineSchema else { return nil }
 
         var context: Context = getSchemaContext(schema)
@@ -148,7 +148,7 @@ open class CodeFormatter {
         return context
     }
 
-    public func getSchemaContext(_ schema: Schema) -> Context {
+    open func getSchemaContext(_ schema: Schema) -> Context {
         var context: Context = [:]
 
         context["raw"] = schema.metadata.json
@@ -224,7 +224,7 @@ open class CodeFormatter {
         return context
     }
 
-    public func getPathContext(_ path: Path) -> Context {
+    open func getPathContext(_ path: Path) -> Context {
         var context: Context = [:]
 
         context["path"] = path.path
@@ -234,7 +234,7 @@ open class CodeFormatter {
         return context
     }
 
-    public func getOperationContext(_ operation: Swagger.Operation) -> Context {
+    open func getOperationContext(_ operation: Swagger.Operation) -> Context {
         var context: Context = [:]
 
         if let operationId = operation.identifier {
@@ -345,7 +345,7 @@ open class CodeFormatter {
         return context
     }
 
-    func getRequestBodyContext(_ requestBody: PossibleReference<RequestBody>) -> Context {
+    open func getRequestBodyContext(_ requestBody: PossibleReference<RequestBody>) -> Context {
         var context: Context = [:]
         let name = "body"
         if let schema = requestBody.value.content.defaultSchema {
@@ -358,7 +358,7 @@ open class CodeFormatter {
         return context
     }
 
-    public func getResponseContext(_ response: OperationResponse) -> Context {
+    open func getResponseContext(_ response: OperationResponse) -> Context {
         var context: Context = [:]
 
         context["success"] = response.successful
@@ -372,7 +372,7 @@ open class CodeFormatter {
         return context
     }
 
-    public func getSecurityRequirementContext(_ securityRequirement: SecurityRequirement) -> Context {
+    open func getSecurityRequirementContext(_ securityRequirement: SecurityRequirement) -> Context {
         var context: Context = [:]
 
         context["name"] = securityRequirement.name
@@ -382,7 +382,7 @@ open class CodeFormatter {
         return context
     }
 
-    public func getParameterContext(_ parameter: Parameter) -> Context {
+    open func getParameterContext(_ parameter: Parameter) -> Context {
         var context: Context = [:]
 
         context["raw"] = parameter.json
@@ -410,7 +410,7 @@ open class CodeFormatter {
         return context
     }
 
-    public func getPropertyContext(_ property: Property) -> Context {
+    open func getPropertyContext(_ property: Property) -> Context {
         var context: Context = getSchemaContext(property.schema)
 
         if let json = context["raw"] as? [String: Any] {
@@ -432,7 +432,7 @@ open class CodeFormatter {
         return context
     }
 
-    public func getEnumContext(_ enumValue: Enum) -> Context {
+    open func getEnumContext(_ enumValue: Enum) -> Context {
         var context: Context = [:]
 
         var specEnum: Enum?
@@ -521,7 +521,7 @@ open class CodeFormatter {
         return escapeType("\(modelPrefix)\(type)\(modelSuffix)")
     }
 
-    public func getSchemaType(name: String, schema: Schema, checkEnum: Bool = true) -> String {
+    open func getSchemaType(name: String, schema: Schema, checkEnum: Bool = true) -> String {
         return "UNKNOWN_SCHEMA_TYPE"
     }
 
