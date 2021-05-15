@@ -4,7 +4,7 @@ import PathKit
 import Swagger
 import Yams
 
-struct Enum {
+public struct Enum {
     let name: String
     let cases: [Any]
     let schema: Schema

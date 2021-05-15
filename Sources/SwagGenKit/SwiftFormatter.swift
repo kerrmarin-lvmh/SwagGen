@@ -1,7 +1,7 @@
 import Foundation
 import Swagger
 
-public class SwiftFormatter: CodeFormatter {
+open class SwiftFormatter: CodeFormatter {
 
     var disallowedKeywords: [String] {
         return [
@@ -78,7 +78,7 @@ public class SwiftFormatter: CodeFormatter {
         super.init(spec: spec, templateConfig: templateConfig)
     }
 
-    override func getSchemaType(name: String, schema: Schema, checkEnum: Bool = true) -> String {
+    override public func getSchemaType(name: String, schema: Schema, checkEnum: Bool = true) -> String {
 
         var enumValue: String?
         if checkEnum {
@@ -165,7 +165,7 @@ public class SwiftFormatter: CodeFormatter {
         }
     }
 
-    override func getSchemaContext(_ schema: Schema) -> Context {
+    override public func getSchemaContext(_ schema: Schema) -> Context {
         var context = super.getSchemaContext(schema)
 
         if let objectSchema = schema.type.object,
@@ -176,7 +176,7 @@ public class SwiftFormatter: CodeFormatter {
         return context
     }
 
-    override func getParameterContext(_ parameter: Parameter) -> Context {
+    override public func getParameterContext(_ parameter: Parameter) -> Context {
         var context = super.getParameterContext(parameter)
 
         let type = context["type"] as! String
@@ -226,7 +226,7 @@ public class SwiftFormatter: CodeFormatter {
         return encodedValue
     }
 
-    override func getPropertyContext(_ property: Property) -> Context {
+    override public func getPropertyContext(_ property: Property) -> Context {
         var context = super.getPropertyContext(property)
 
         let type = context["type"] as! String
@@ -244,21 +244,21 @@ public class SwiftFormatter: CodeFormatter {
         return context
     }
 
-    override func getResponseContext(_ response: OperationResponse) -> Context {
+    override public func getResponseContext(_ response: OperationResponse) -> Context {
         var context = super.getResponseContext(response)
         let type = context["type"] as? String ?? ""
         context["isAnyType"] = type.contains("Any")
         return context
     }
 
-    override func getEscapedType(_ name: String) -> String {
+    private func getEscapedType(_ name: String) -> String {
         if inbuiltTypes.contains(name) {
             return "\(name)Type"
         }
         return "`\(name)`"
     }
 
-    override func getEscapedName(_ name: String) -> String {
+    private func getEscapedName(_ name: String) -> String {
         return "`\(name)`"
     }
 }

@@ -1,9 +1,9 @@
 import Foundation
 import Swagger
 
-typealias Context = [String: Any?]
+public typealias Context = [String: Any?]
 
-public class CodeFormatter {
+open class CodeFormatter {
 
     var spec: SwaggerSpec
     var filenames: [String] = []
@@ -67,7 +67,7 @@ public class CodeFormatter {
         return (value1[by] as? String ?? "") < (value2[by] as? String ?? "")
     }
 
-    func getServerContext(index: Int, server: Server) -> Context {
+    public func getServerContext(index: Int, server: Server) -> Context {
         var context: Context = [:]
         let defaultName = index == 0 ? "main" : "server\(index + 1)"
         context["name"] = getName(server.name?.lowercased() ?? defaultName)
@@ -85,7 +85,7 @@ public class CodeFormatter {
         return context
     }
 
-    func getSecuritySchemeContext(_ securityScheme: ComponentObject<SecurityScheme>) -> Context {
+    public func getSecuritySchemeContext(_ securityScheme: ComponentObject<SecurityScheme>) -> Context {
         var context: Context = [:]
 
         context["name"] = securityScheme.name
@@ -94,7 +94,7 @@ public class CodeFormatter {
         return context
     }
 
-    func getSpecInformationContext(_ info: Info) -> Context {
+    public func getSpecInformationContext(_ info: Info) -> Context {
         var context: Context = [:]
 
         context["title"] = info.title.description
@@ -104,7 +104,7 @@ public class CodeFormatter {
         return context
     }
 
-    func getSchemaContent(_ schema: ComponentObject<Schema>) -> Context {
+    public func getSchemaContent(_ schema: ComponentObject<Schema>) -> Context {
         var context = getSchemaContext(schema.value)
 
         context["type"] = getSchemaTypeName(schema)
@@ -139,7 +139,7 @@ public class CodeFormatter {
         }
     }
 
-    func getInlineSchemaContext(_ schema: Schema, name: String) -> Context? {
+    public func getInlineSchemaContext(_ schema: Schema, name: String) -> Context? {
         guard let schema = schema.inlineSchema else { return nil }
 
         var context: Context = getSchemaContext(schema)
@@ -148,7 +148,7 @@ public class CodeFormatter {
         return context
     }
 
-    func getSchemaContext(_ schema: Schema) -> Context {
+    public func getSchemaContext(_ schema: Schema) -> Context {
         var context: Context = [:]
 
         context["raw"] = schema.metadata.json
@@ -224,7 +224,7 @@ public class CodeFormatter {
         return context
     }
 
-    func getPathContext(_ path: Path) -> Context {
+    public func getPathContext(_ path: Path) -> Context {
         var context: Context = [:]
 
         context["path"] = path.path
@@ -234,7 +234,7 @@ public class CodeFormatter {
         return context
     }
 
-    func getOperationContext(_ operation: Swagger.Operation) -> Context {
+    public func getOperationContext(_ operation: Swagger.Operation) -> Context {
         var context: Context = [:]
 
         if let operationId = operation.identifier {
@@ -358,7 +358,7 @@ public class CodeFormatter {
         return context
     }
 
-    func getResponseContext(_ response: OperationResponse) -> Context {
+    public func getResponseContext(_ response: OperationResponse) -> Context {
         var context: Context = [:]
 
         context["success"] = response.successful
@@ -372,7 +372,7 @@ public class CodeFormatter {
         return context
     }
 
-    func getSecurityRequirementContext(_ securityRequirement: SecurityRequirement) -> Context {
+    public func getSecurityRequirementContext(_ securityRequirement: SecurityRequirement) -> Context {
         var context: Context = [:]
 
         context["name"] = securityRequirement.name
@@ -382,7 +382,7 @@ public class CodeFormatter {
         return context
     }
 
-    func getParameterContext(_ parameter: Parameter) -> Context {
+    public func getParameterContext(_ parameter: Parameter) -> Context {
         var context: Context = [:]
 
         context["raw"] = parameter.json
@@ -410,7 +410,7 @@ public class CodeFormatter {
         return context
     }
 
-    func getPropertyContext(_ property: Property) -> Context {
+    public func getPropertyContext(_ property: Property) -> Context {
         var context: Context = getSchemaContext(property.schema)
 
         if let json = context["raw"] as? [String: Any] {
@@ -432,7 +432,7 @@ public class CodeFormatter {
         return context
     }
 
-    func getEnumContext(_ enumValue: Enum) -> Context {
+    public func getEnumContext(_ enumValue: Enum) -> Context {
         var context: Context = [:]
 
         var specEnum: Enum?
@@ -468,7 +468,7 @@ public class CodeFormatter {
         return context
     }
 
-    func escapeString(_ string: String) -> String {
+    private func escapeString(_ string: String) -> String {
         let replacements: [(String, String)] = [
             (">=", "greaterThanOrEqualTo"),
             ("<=", "lessThanOrEqualTo"),
@@ -506,14 +506,14 @@ public class CodeFormatter {
         return escapeName(name)
     }
 
-    func getEnumType(_ name: String) -> String {
+    private func getEnumType(_ name: String) -> String {
         if let enumName = enumNames[name] {
             return enumName
         }
         return escapeType("\(modelPrefix)\(name.upperCamelCased())")
     }
 
-    func getModelType(_ name: String) -> String {
+    private func getModelType(_ name: String) -> String {
         if let modelName = modelNames[name] {
             return modelName
         }
@@ -521,13 +521,13 @@ public class CodeFormatter {
         return escapeType("\(modelPrefix)\(type)\(modelSuffix)")
     }
 
-    func getSchemaType(name: String, schema: Schema, checkEnum: Bool = true) -> String {
+    public func getSchemaType(name: String, schema: Schema, checkEnum: Bool = true) -> String {
         return "UNKNOWN_SCHEMA_TYPE"
     }
 
     // MARK: escaping
 
-    func escapeName(_ name: String) -> String {
+    private func escapeName(_ name: String) -> String {
         let string = escapeString(name)
         return disallowedNames.contains(string) ? getEscapedName(string) : string
     }
@@ -537,11 +537,11 @@ public class CodeFormatter {
         return disallowedTypes.contains(string) ? getEscapedType(string) : string
     }
 
-    func getEscapedType(_ type: String) -> String {
+    private func getEscapedType(_ type: String) -> String {
         return "_\(type)"
     }
 
-    func getEscapedName(_ name: String) -> String {
+    private func getEscapedName(_ name: String) -> String {
         return "_\(name)"
     }
 }
