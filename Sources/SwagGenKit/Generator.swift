@@ -11,7 +11,7 @@ public class Generator {
     let context: JSONDictionary
     let environment: Environment
 
-    public init(context: JSONDictionary, destination: Path, templateConfig: TemplateConfig) {
+    public init(context: JSONDictionary, destination: Path, templateConfig: TemplateConfig, customExtensions: [Extension] = []) {
         var mergedContext = context
         mergedContext["options"] = templateConfig.options
         self.context = mergedContext
@@ -27,7 +27,7 @@ public class Generator {
 
         environment = Environment(
             loader: FileSystemLoader(paths: [templateConfig.basePath]),
-            extensions: [filterExtension, stencilSwiftKitExtension],
+            extensions: [filterExtension, stencilSwiftKitExtension] + customExtensions,
             templateClass: SwagGenStencilTemplate.self
         )
     }
