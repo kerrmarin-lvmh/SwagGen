@@ -50,7 +50,7 @@ extension SwaggerSpec {
         return dictionary
     }
 
-    var enums: [Enum] {
+    public var enums: [Enum] {
         return components.parameters.compactMap { $0.value.getEnum(name: $0.name, description: $0.value.description) }
     }
 }
