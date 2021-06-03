@@ -62,7 +62,7 @@ func + (lhs: [String: Any?], rhs: [String: Any?]) -> [String: Any] {
 fileprivate let separators = [" ", "_", "-", "."]
 fileprivate let acronymStrings = ["URL"]
 
-extension String {
+public extension String {
 
     private func camelCased(seperator: String) -> String {
 
