@@ -5,12 +5,21 @@ import Swagger
 import Yams
 
 public struct Enum {
-    let name: String
-    let cases: [Any]
-    let schema: Schema
-    let description: String?
-    let metadata: Metadata
-    let names: [String]?
+    public let name: String
+    public let cases: [Any]
+    public let schema: Schema
+    public let description: String?
+    public let metadata: Metadata
+    public let names: [String]?
+
+    public init(name: String, cases: [Any], schema: Schema, description: String?, metadata: Metadata, names: [String]?) {
+        self.name = name
+        self.cases = cases
+        self.schema = schema
+        self.description = description
+        self.metadata = metadata
+        self.names = names
+    }
 }
 
 struct ResponseFormatter {
