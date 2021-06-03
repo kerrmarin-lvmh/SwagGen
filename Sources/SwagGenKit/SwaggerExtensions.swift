@@ -11,25 +11,16 @@ public struct Enum {
     public let description: String?
     public let metadata: Metadata
     public let names: [String]?
-
-    public init(name: String, cases: [Any], schema: Schema, description: String?, metadata: Metadata, names: [String]?) {
-        self.name = name
-        self.cases = cases
-        self.schema = schema
-        self.description = description
-        self.metadata = metadata
-        self.names = names
-    }
 }
 
-struct ResponseFormatter {
-    let response: Response
-    let successful: Bool
-    let name: String?
-    let statusCode: Int?
+public struct ResponseFormatter {
+    public let response: Response
+    public let successful: Bool
+    public let name: String?
+    public let statusCode: Int?
 }
 
-extension SwaggerSpec {
+public extension SwaggerSpec {
 
     var operationsByTag: [String: [Swagger.Operation]] {
         var dictionary: [String: [Swagger.Operation]] = [:]
@@ -50,12 +41,12 @@ extension SwaggerSpec {
         return dictionary
     }
 
-    public var enums: [Enum] {
+    var enums: [Enum] {
         return components.parameters.compactMap { $0.value.getEnum(name: $0.name, description: $0.value.description) }
     }
 }
 
-extension Metadata {
+public extension Metadata {
 
     func getEnum(name: String, schema: Schema, description: String?) -> Enum? {
         if let enumValues = enumValues {
@@ -65,7 +56,7 @@ extension Metadata {
     }
 }
 
-extension Schema {
+public extension Schema {
 
     var parent: ComponentObject<Schema>? {
         if case let .group(group) = type, group.type == .all {
@@ -174,7 +165,7 @@ extension Schema {
     }
 }
 
-extension Swagger.Operation {
+public extension Swagger.Operation {
 
     func getParameters(type: ParameterLocation) -> [Parameter] {
         return parameters.map { $0.value }.filter { $0.location == type }
@@ -195,7 +186,7 @@ extension Swagger.Operation {
     }
 }
 
-extension ObjectSchema {
+public extension ObjectSchema {
 
     var enums: [Enum] {
         var enums: [Enum] = []
@@ -213,13 +204,13 @@ extension ObjectSchema {
     }
 }
 
-extension OperationResponse {
+public extension OperationResponse {
 
-    public var successful: Bool {
+    var successful: Bool {
         return statusCode?.description.hasPrefix("2") ?? false
     }
 
-    public var name: String {
+    var name: String {
         if let statusCode = statusCode {
             return "Status\(statusCode.description)"
         } else {
@@ -236,14 +227,14 @@ extension OperationResponse {
     }
 }
 
-extension Response {
+public extension Response {
 
     var schema: Schema? {
         return content?.defaultSchema
     }
 }
 
-extension Property {
+public extension Property {
 
     var isEnum: Bool {
         return enumValue != nil
@@ -254,7 +245,7 @@ extension Property {
     }
 }
 
-extension Parameter {
+public extension Parameter {
 
     func getEnum(name: String, description: String?) -> Enum? {
         switch type {
@@ -279,7 +270,7 @@ extension Parameter {
     }
 }
 
-extension Schema {
+public extension Schema {
 
     var canBeEnum: Bool {
         switch type {
@@ -306,7 +297,7 @@ extension Schema {
     }
 }
 
-extension Content {
+public extension Content {
 
     var defaultSchema: Schema? {
         return getMediaItem(.json)?.schema ?? mediaItems.values.first?.schema
