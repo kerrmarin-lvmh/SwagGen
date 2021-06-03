@@ -122,7 +122,7 @@ extension Schema {
         return (parent?.value.inheritedOptionalProperties ?? []) + optionalProperties
     }
 
-    func getEnum(name: String, description: String?) -> Enum? {
+    public func getEnum(name: String, description: String?) -> Enum? {
         switch type {
         case let .object(objectSchema):
             if let schema = objectSchema.additionalProperties {
