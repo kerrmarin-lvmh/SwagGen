@@ -59,7 +59,7 @@ func + (lhs: [String: Any?], rhs: [String: Any?]) -> [String: Any] {
     return combined
 }
 
-fileprivate let separators = [" ", "_", "-", "."]
+fileprivate let separators = [" ", "_", "-", ".", "/"]
 fileprivate let acronymStrings = ["URL"]
 
 public extension String {
@@ -95,7 +95,7 @@ public extension String {
         return first + rest
     }
 
-    private func camelCaseSeperators() -> String {
+    private func camelCaseSeparators() -> String {
         var string = self
         for separator in separators {
             if string.contains(separator) {
@@ -115,7 +115,7 @@ public extension String {
 
     func lowerCamelCased() -> String {
 
-        let string = camelCaseSeperators()
+        let string = self.camelCaseSeparators()
 
         if string == string.uppercased(), !hasSeparator {
             return string.lowercased()
@@ -128,7 +128,7 @@ public extension String {
         if acronymStrings.contains(uppercased()), !hasSeparator {
             return uppercased()
         }
-        return camelCaseSeperators().mapFirstChar { $0.uppercased() }
+        return self.camelCaseSeparators().mapFirstChar { $0.uppercased() }
     }
 }
 
