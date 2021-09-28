@@ -9,13 +9,13 @@ let package = Package(
         .library(name: "Swagger", targets: ["Swagger"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/kylef/PathKit.git", from: "0.9.0"),
-        .package(url: "https://github.com/jakeheis/SwiftCLI", from: "5.3.0"),
-        .package(url: "https://github.com/SwiftGen/StencilSwiftKit.git", from: "2.7.2"),
-        .package(url: "https://github.com/jpsim/Yams.git", from: "4.0.0"),
-        .package(url: "https://github.com/yonaskolb/JSONUtilities.git", from: "4.1.0"),
-        .package(url: "https://github.com/kerrmarin-lvmh/Spectre.git", .branch("master")),
-        .package(url: "https://github.com/onevcat/Rainbow.git", from: "3.1.0"),
+        .package(url: "https://github.com/kylef/PathKit.git", from: "1.0.1"),
+        .package(url: "https://github.com/jakeheis/SwiftCLI", from: "6.0.3"),
+        .package(url: "https://github.com/SwiftGen/StencilSwiftKit.git", from: "2.8.0"),
+        .package(url: "https://github.com/jpsim/Yams.git", from: "4.0.6"),
+        .package(url: "https://github.com/yonaskolb/JSONUtilities.git", from: "4.2.0"),
+        .package(url: "https://github.com/kylef/Spectre.git", from: "0.10.1"),
+        .package(url: "https://github.com/onevcat/Rainbow.git", from: "4.0.0"),
     ],
     targets: [
         .target(name: "SwagGen", dependencies: [

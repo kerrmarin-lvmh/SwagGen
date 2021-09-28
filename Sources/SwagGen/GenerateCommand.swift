@@ -11,7 +11,7 @@ class GenerateCommand: Command {
     let name = "generate"
     let shortDescription = "Generates code for a Swagger spec"
 
-    let spec = SwiftCLI.Parameter()
+    let spec = SwiftCLI.Param<String>()
 
     let clean = Key<Generator.Clean>("--clean", "-c", description: """
         How the destination directory will be cleaned of non generated files:
@@ -33,8 +33,8 @@ class GenerateCommand: Command {
         for example, --option "typeAliases.ID:String" would change the type alias of ID to String.
         """)
 
-    let verbose = Flag("--verbose", "-v", description: "Show verbose output", defaultValue: false)
-    let silent = Flag("--silent", "-s", description: "Silence standard output", defaultValue: false)
+    let verbose = Flag("--verbose", "-v", description: "Show verbose output")
+    let silent = Flag("--silent", "-s", description: "Silence standard output")
 
     func execute() throws {
         let clean = self.clean.value ?? .none
