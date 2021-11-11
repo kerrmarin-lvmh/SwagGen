@@ -25,7 +25,7 @@ public class FareDetails: APIModel {
 
     public var mode: String?
 
-    public var `operator`: String?
+    public var _operator: String?
 
     public var passengerType: String?
 
@@ -49,7 +49,7 @@ public class FareDetails: APIModel {
 
     public var via: String?
 
-    public init(boundsId: Int? = nil, displayName: String? = nil, displayOrder: Int? = nil, endDate: DateTime? = nil, from: String? = nil, fromStation: String? = nil, isTour: Bool? = nil, messages: [Message]? = nil, mode: String? = nil, `operator`: String? = nil, passengerType: String? = nil, routeCode: String? = nil, routeDescription: String? = nil, specialFare: Bool? = nil, startDate: DateTime? = nil, throughFare: Bool? = nil, ticketsAvailable: [Ticket]? = nil, to: String? = nil, toStation: String? = nil, validatorInformation: String? = nil, via: String? = nil) {
+    public init(boundsId: Int? = nil, displayName: String? = nil, displayOrder: Int? = nil, endDate: DateTime? = nil, from: String? = nil, fromStation: String? = nil, isTour: Bool? = nil, messages: [Message]? = nil, mode: String? = nil, _operator: String? = nil, passengerType: String? = nil, routeCode: String? = nil, routeDescription: String? = nil, specialFare: Bool? = nil, startDate: DateTime? = nil, throughFare: Bool? = nil, ticketsAvailable: [Ticket]? = nil, to: String? = nil, toStation: String? = nil, validatorInformation: String? = nil, via: String? = nil) {
         self.boundsId = boundsId
         self.displayName = displayName
         self.displayOrder = displayOrder
@@ -59,7 +59,7 @@ public class FareDetails: APIModel {
         self.isTour = isTour
         self.messages = messages
         self.mode = mode
-        self.`operator` = `operator`
+        self._operator = _operator
         self.passengerType = passengerType
         self.routeCode = routeCode
         self.routeDescription = routeDescription
@@ -85,7 +85,7 @@ public class FareDetails: APIModel {
         isTour = try container.decodeIfPresent("isTour")
         messages = try container.decodeArrayIfPresent("messages")
         mode = try container.decodeIfPresent("mode")
-        `operator` = try container.decodeIfPresent("operator")
+        _operator = try container.decodeIfPresent("operator")
         passengerType = try container.decodeIfPresent("passengerType")
         routeCode = try container.decodeIfPresent("routeCode")
         routeDescription = try container.decodeIfPresent("routeDescription")
@@ -111,7 +111,7 @@ public class FareDetails: APIModel {
         try container.encodeIfPresent(isTour, forKey: "isTour")
         try container.encodeIfPresent(messages, forKey: "messages")
         try container.encodeIfPresent(mode, forKey: "mode")
-        try container.encodeIfPresent(`operator`, forKey: "operator")
+        try container.encodeIfPresent(_operator, forKey: "operator")
         try container.encodeIfPresent(passengerType, forKey: "passengerType")
         try container.encodeIfPresent(routeCode, forKey: "routeCode")
         try container.encodeIfPresent(routeDescription, forKey: "routeDescription")
@@ -136,7 +136,7 @@ public class FareDetails: APIModel {
       guard self.isTour == object.isTour else { return false }
       guard self.messages == object.messages else { return false }
       guard self.mode == object.mode else { return false }
-      guard self.`operator` == object.`operator` else { return false }
+      guard self._operator == object._operator else { return false }
       guard self.passengerType == object.passengerType else { return false }
       guard self.routeCode == object.routeCode else { return false }
       guard self.routeDescription == object.routeDescription else { return false }

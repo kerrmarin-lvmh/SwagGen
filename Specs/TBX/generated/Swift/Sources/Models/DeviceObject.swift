@@ -12,13 +12,13 @@ public class DeviceObject: APIModel {
     /** When this device was created */
     public var createdAt: DateTime
 
-    public var type: `Type`
+    public var type: _Type
 
     public var customer: Customer
 
     public var description: String?
 
-    public class `Type`: APIModel {
+    public class _Type: APIModel {
 
         public var code: String?
 
@@ -44,13 +44,13 @@ public class DeviceObject: APIModel {
         }
 
         public func isEqual(to object: Any?) -> Bool {
-          guard let object = object as? `Type` else { return false }
+          guard let object = object as? _Type else { return false }
           guard self.code == object.code else { return false }
           guard self.description == object.description else { return false }
           return true
         }
 
-        public static func == (lhs: `Type`, rhs: `Type`) -> Bool {
+        public static func == (lhs: _Type, rhs: _Type) -> Bool {
             return lhs.isEqual(to: rhs)
         }
     }
@@ -185,7 +185,7 @@ public class DeviceObject: APIModel {
         }
     }
 
-    public init(token: String, createdAt: DateTime, type: `Type`, customer: Customer, description: String? = nil) {
+    public init(token: String, createdAt: DateTime, type: _Type, customer: Customer, description: String? = nil) {
         self.token = token
         self.createdAt = createdAt
         self.type = type

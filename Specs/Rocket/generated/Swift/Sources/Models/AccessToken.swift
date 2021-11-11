@@ -8,7 +8,7 @@ import Foundation
 public class AccessToken: APIModel {
 
     /** The type of the token. */
-    public enum `Type`: String, Codable, Equatable, CaseIterable {
+    public enum _Type: String, Codable, Equatable, CaseIterable {
         case userAccount = "UserAccount"
         case userProfile = "UserProfile"
     }
@@ -23,9 +23,9 @@ public class AccessToken: APIModel {
     public var expirationDate: DateTime
 
     /** The type of the token. */
-    public var type: `Type`
+    public var type: _Type
 
-    public init(value: String, refreshable: Bool, expirationDate: DateTime, type: `Type`) {
+    public init(value: String, refreshable: Bool, expirationDate: DateTime, type: _Type) {
         self.value = value
         self.refreshable = refreshable
         self.expirationDate = expirationDate

@@ -53,7 +53,7 @@ extension Petstore.Pets {
             case status200([Pet])
 
             /** unexpected error */
-            case defaultResponse(statusCode: Int, ErrorType)
+            case defaultResponse(statusCode: Int, _Error)
 
             public var success: [Pet]? {
                 switch self {
@@ -62,7 +62,7 @@ extension Petstore.Pets {
                 }
             }
 
-            public var failure: ErrorType? {
+            public var failure: _Error? {
                 switch self {
                 case .defaultResponse(_, let response): return response
                 default: return nil
@@ -70,7 +70,7 @@ extension Petstore.Pets {
             }
 
             /// either success or failure value. Success is anything in the 200..<300 status code range
-            public var responseResult: APIResponseResult<[Pet], ErrorType> {
+            public var responseResult: APIResponseResult<[Pet], _Error> {
                 if let successValue = success {
                     return .success(successValue)
                 } else if let failureValue = failure {
@@ -104,7 +104,7 @@ extension Petstore.Pets {
             public init(statusCode: Int, data: Data, decoder: ResponseDecoder) throws {
                 switch statusCode {
                 case 200: self = try .status200(decoder.decode([Pet].self, from: data))
-                default: self = try .defaultResponse(statusCode: statusCode, decoder.decode(ErrorType.self, from: data))
+                default: self = try .defaultResponse(statusCode: statusCode, decoder.decode(_Error.self, from: data))
                 }
             }
 

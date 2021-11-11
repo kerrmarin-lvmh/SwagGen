@@ -10,6 +10,7 @@ public struct Operation {
     public let requestBody: PossibleReference<RequestBody>?
     public let pathParameters: [PossibleReference<Parameter>]
     public let operationParameters: [PossibleReference<Parameter>]
+    public let servers: [Server]
 
     public var parameters: [PossibleReference<Parameter>] {
         return pathParameters.filter { pathParam in
@@ -54,6 +55,7 @@ extension Operation {
         summary = jsonDictionary.json(atKeyPath: "summary")
         description = jsonDictionary.json(atKeyPath: "description")
         requestBody = jsonDictionary.json(atKeyPath: "requestBody")
+        servers = jsonDictionary.json(atKeyPath: "servers") ?? []
 
         identifier = jsonDictionary.json(atKeyPath: "operationId")
         tags = (jsonDictionary.json(atKeyPath: "tags")) ?? []

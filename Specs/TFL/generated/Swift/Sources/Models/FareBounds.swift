@@ -25,7 +25,7 @@ public class FareBounds: APIModel {
 
     public var messages: [Message]?
 
-    public var `operator`: String?
+    public var _operator: String?
 
     public var routeCode: String?
 
@@ -33,7 +33,7 @@ public class FareBounds: APIModel {
 
     public var via: String?
 
-    public init(description: String? = nil, displayName: String? = nil, displayOrder: Int? = nil, from: String? = nil, id: Int? = nil, isPopularFare: Bool? = nil, isPopularTravelCard: Bool? = nil, isTour: Bool? = nil, messages: [Message]? = nil, `operator`: String? = nil, routeCode: String? = nil, to: String? = nil, via: String? = nil) {
+    public init(description: String? = nil, displayName: String? = nil, displayOrder: Int? = nil, from: String? = nil, id: Int? = nil, isPopularFare: Bool? = nil, isPopularTravelCard: Bool? = nil, isTour: Bool? = nil, messages: [Message]? = nil, _operator: String? = nil, routeCode: String? = nil, to: String? = nil, via: String? = nil) {
         self.description = description
         self.displayName = displayName
         self.displayOrder = displayOrder
@@ -43,7 +43,7 @@ public class FareBounds: APIModel {
         self.isPopularTravelCard = isPopularTravelCard
         self.isTour = isTour
         self.messages = messages
-        self.`operator` = `operator`
+        self._operator = _operator
         self.routeCode = routeCode
         self.to = to
         self.via = via
@@ -61,7 +61,7 @@ public class FareBounds: APIModel {
         isPopularTravelCard = try container.decodeIfPresent("isPopularTravelCard")
         isTour = try container.decodeIfPresent("isTour")
         messages = try container.decodeArrayIfPresent("messages")
-        `operator` = try container.decodeIfPresent("operator")
+        _operator = try container.decodeIfPresent("operator")
         routeCode = try container.decodeIfPresent("routeCode")
         to = try container.decodeIfPresent("to")
         via = try container.decodeIfPresent("via")
@@ -79,7 +79,7 @@ public class FareBounds: APIModel {
         try container.encodeIfPresent(isPopularTravelCard, forKey: "isPopularTravelCard")
         try container.encodeIfPresent(isTour, forKey: "isTour")
         try container.encodeIfPresent(messages, forKey: "messages")
-        try container.encodeIfPresent(`operator`, forKey: "operator")
+        try container.encodeIfPresent(_operator, forKey: "operator")
         try container.encodeIfPresent(routeCode, forKey: "routeCode")
         try container.encodeIfPresent(to, forKey: "to")
         try container.encodeIfPresent(via, forKey: "via")
@@ -96,7 +96,7 @@ public class FareBounds: APIModel {
       guard self.isPopularTravelCard == object.isPopularTravelCard else { return false }
       guard self.isTour == object.isTour else { return false }
       guard self.messages == object.messages else { return false }
-      guard self.`operator` == object.`operator` else { return false }
+      guard self._operator == object._operator else { return false }
       guard self.routeCode == object.routeCode else { return false }
       guard self.to == object.to else { return false }
       guard self.via == object.via else { return false }

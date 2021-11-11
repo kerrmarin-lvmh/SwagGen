@@ -7,9 +7,9 @@ import Foundation
 
 public class ChildWithNestedObject: User {
 
-    public var data: DataType?
+    public var data: _Data?
 
-    public class DataType: APIModel {
+    public class _Data: APIModel {
 
         public var value: String?
 
@@ -30,17 +30,17 @@ public class ChildWithNestedObject: User {
         }
 
         public func isEqual(to object: Any?) -> Bool {
-          guard let object = object as? DataType else { return false }
+          guard let object = object as? _Data else { return false }
           guard self.value == object.value else { return false }
           return true
         }
 
-        public static func == (lhs: DataType, rhs: DataType) -> Bool {
+        public static func == (lhs: _Data, rhs: _Data) -> Bool {
             return lhs.isEqual(to: rhs)
         }
     }
 
-    public init(id: Int? = nil, name: String? = nil, data: DataType? = nil) {
+    public init(id: Int? = nil, name: String? = nil, data: _Data? = nil) {
         self.data = data
         super.init(id: id, name: name)
     }

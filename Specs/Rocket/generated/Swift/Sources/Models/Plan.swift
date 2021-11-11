@@ -8,7 +8,7 @@ import Foundation
 public class Plan: APIModel {
 
     /** The type of plan. */
-    public enum `Type`: String, Codable, Equatable, CaseIterable {
+    public enum _Type: String, Codable, Equatable, CaseIterable {
         case free = "Free"
         case subscription = "Subscription"
     }
@@ -37,7 +37,7 @@ public class Plan: APIModel {
     public var tagline: String
 
     /** The type of plan. */
-    public var type: `Type`
+    public var type: _Type
 
     /** True if a plan should be highlighted as featured, false if not. */
     public var isFeatured: Bool
@@ -84,7 +84,7 @@ public class Plan: APIModel {
     /** The price of a plan. If a free plan then undefined. */
     public var price: Float?
 
-    public init(id: String, title: String, tagline: String, type: `Type`, isFeatured: Bool, isActive: Bool, isPrivate: Bool, revenueType: RevenueType, subscriptionCode: String, alias: String, benefits: [String], billingPeriodType: BillingPeriodType, billingPeriodFrequency: Int, hasTrialPeriod: Bool, trialPeriodDays: Int, termsAndConditions: String, currency: String, customFields: [String: Any]? = nil, price: Float? = nil) {
+    public init(id: String, title: String, tagline: String, type: _Type, isFeatured: Bool, isActive: Bool, isPrivate: Bool, revenueType: RevenueType, subscriptionCode: String, alias: String, benefits: [String], billingPeriodType: BillingPeriodType, billingPeriodFrequency: Int, hasTrialPeriod: Bool, trialPeriodDays: Int, termsAndConditions: String, currency: String, customFields: [String: Any]? = nil, price: Float? = nil) {
         self.id = id
         self.title = title
         self.tagline = tagline

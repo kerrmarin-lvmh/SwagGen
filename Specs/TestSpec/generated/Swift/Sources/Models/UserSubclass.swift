@@ -10,9 +10,9 @@ public class UserSubclass: User {
     public var age: Int?
 
     /** last error reported to user object, or null if they have not seen an error. */
-    public var lastError: ErrorType?
+    public var lastError: _Error?
 
-    public init(id: Int? = nil, name: String? = nil, age: Int? = nil, lastError: ErrorType? = nil) {
+    public init(id: Int? = nil, name: String? = nil, age: Int? = nil, lastError: _Error? = nil) {
         self.age = age
         self.lastError = lastError
         super.init(id: id, name: name)

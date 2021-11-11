@@ -23,7 +23,7 @@ extension TestSpec {
             public typealias SuccessType = Void
 
             /** unexpected error */
-            case defaultResponse(statusCode: Int, ErrorType)
+            case defaultResponse(statusCode: Int, _Error)
 
             public var success: Void? {
                 switch self {
@@ -31,7 +31,7 @@ extension TestSpec {
                 }
             }
 
-            public var failure: ErrorType? {
+            public var failure: _Error? {
                 switch self {
                 case .defaultResponse(_, let response): return response
                 default: return nil
@@ -39,7 +39,7 @@ extension TestSpec {
             }
 
             /// either success or failure value. Success is anything in the 200..<300 status code range
-            public var responseResult: APIResponseResult<Void, ErrorType> {
+            public var responseResult: APIResponseResult<Void, _Error> {
                 if let successValue = success {
                     return .success(successValue)
                 } else if let failureValue = failure {
@@ -69,7 +69,7 @@ extension TestSpec {
 
             public init(statusCode: Int, data: Data, decoder: ResponseDecoder) throws {
                 switch statusCode {
-                default: self = try .defaultResponse(statusCode: statusCode, decoder.decode(ErrorType.self, from: data))
+                default: self = try .defaultResponse(statusCode: statusCode, decoder.decode(_Error.self, from: data))
                 }
             }
 

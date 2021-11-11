@@ -8,27 +8,27 @@ import Foundation
 /** Model for testing reserved words */
 public class Return: APIModel {
 
-    public var `return`: Int?
+    public var _return: Int?
 
-    public init(`return`: Int? = nil) {
-        self.`return` = `return`
+    public init(_return: Int? = nil) {
+        self._return = _return
     }
 
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
-        `return` = try container.decodeIfPresent("return")
+        _return = try container.decodeIfPresent("return")
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: StringCodingKey.self)
 
-        try container.encodeIfPresent(`return`, forKey: "return")
+        try container.encodeIfPresent(_return, forKey: "return")
     }
 
     public func isEqual(to object: Any?) -> Bool {
       guard let object = object as? Return else { return false }
-      guard self.`return` == object.`return` else { return false }
+      guard self._return == object._return else { return false }
       return true
     }
 

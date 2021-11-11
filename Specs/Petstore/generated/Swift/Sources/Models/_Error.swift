@@ -5,7 +5,7 @@
 
 import Foundation
 
-public class ErrorType: APIModel {
+public class _Error: APIModel {
 
     public var code: Int
 
@@ -31,13 +31,13 @@ public class ErrorType: APIModel {
     }
 
     public func isEqual(to object: Any?) -> Bool {
-      guard let object = object as? ErrorType else { return false }
+      guard let object = object as? _Error else { return false }
       guard self.code == object.code else { return false }
       guard self.message == object.message else { return false }
       return true
     }
 
-    public static func == (lhs: ErrorType, rhs: ErrorType) -> Bool {
+    public static func == (lhs: _Error, rhs: _Error) -> Bool {
         return lhs.isEqual(to: rhs)
     }
 }

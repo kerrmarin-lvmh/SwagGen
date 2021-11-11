@@ -7,7 +7,7 @@ import Foundation
 
 public class Period: APIModel {
 
-    public enum `Type`: String, Codable, Equatable, CaseIterable {
+    public enum _Type: String, Codable, Equatable, CaseIterable {
         case normal = "Normal"
         case frequencyHours = "FrequencyHours"
         case frequencyMinutes = "FrequencyMinutes"
@@ -20,9 +20,9 @@ public class Period: APIModel {
 
     public var toTime: TwentyFourHourClockTime?
 
-    public var type: `Type`?
+    public var type: _Type?
 
-    public init(frequency: ServiceFrequency? = nil, fromTime: TwentyFourHourClockTime? = nil, toTime: TwentyFourHourClockTime? = nil, type: `Type`? = nil) {
+    public init(frequency: ServiceFrequency? = nil, fromTime: TwentyFourHourClockTime? = nil, toTime: TwentyFourHourClockTime? = nil, type: _Type? = nil) {
         self.frequency = frequency
         self.fromTime = fromTime
         self.toTime = toTime

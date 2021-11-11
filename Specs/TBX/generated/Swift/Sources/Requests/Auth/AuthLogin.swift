@@ -23,7 +23,7 @@ extension TBX.Auth {
                 public var idp: String
 
                 /** URL to send the client after login or if client press the cancel button in case cancel parameter was not be set, but if this parameter is blank the token will be returned as json */
-                public var `return`: String?
+                public var _return: String?
 
                 /** URL to send the client if he press the cancel button */
                 public var cancel: String?
@@ -34,10 +34,10 @@ extension TBX.Auth {
                 /** Token created by one Identity Provider to login a client without send the client to him */
                 public var token: String?
 
-                public init(cp: String, idp: String, `return`: String? = nil, cancel: String? = nil, country: String? = nil, token: String? = nil) {
+                public init(cp: String, idp: String, _return: String? = nil, cancel: String? = nil, country: String? = nil, token: String? = nil) {
                     self.cp = cp
                     self.idp = idp
-                    self.`return` = `return`
+                    self._return = _return
                     self.cancel = cancel
                     self.country = country
                     self.token = token
@@ -52,8 +52,8 @@ extension TBX.Auth {
             }
 
             /// convenience initialiser so an Option doesn't have to be created
-            public convenience init(cp: String, idp: String, `return`: String? = nil, cancel: String? = nil, country: String? = nil, token: String? = nil) {
-                let options = Options(cp: cp, idp: idp, `return`: `return`, cancel: cancel, country: country, token: token)
+            public convenience init(cp: String, idp: String, _return: String? = nil, cancel: String? = nil, country: String? = nil, token: String? = nil) {
+                let options = Options(cp: cp, idp: idp, _return: _return, cancel: cancel, country: country, token: token)
                 self.init(options: options)
             }
 
@@ -64,8 +64,8 @@ extension TBX.Auth {
             public override var queryParameters: [String: Any] {
                 var params: [String: Any] = [:]
                 params["idp"] = options.idp
-                if let `return` = options.`return` {
-                  params["return"] = `return`
+                if let _return = options._return {
+                  params["return"] = _return
                 }
                 if let cancel = options.cancel {
                   params["cancel"] = cancel

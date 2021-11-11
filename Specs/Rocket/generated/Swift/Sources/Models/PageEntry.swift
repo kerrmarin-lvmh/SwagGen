@@ -12,7 +12,7 @@ Also defines what visual template should be used to render that content.
 public class PageEntry: APIModel {
 
     /** The type of PageEntry. Used to help identify what type of content will be presented. */
-    public enum `Type`: String, Codable, Equatable, CaseIterable {
+    public enum _Type: String, Codable, Equatable, CaseIterable {
         case itemEntry = "ItemEntry"
         case itemDetailEntry = "ItemDetailEntry"
         case listEntry = "ListEntry"
@@ -28,7 +28,7 @@ public class PageEntry: APIModel {
     public var id: String
 
     /** The type of PageEntry. Used to help identify what type of content will be presented. */
-    public var type: `Type`
+    public var type: _Type
 
     /** The name of the Page Entry. */
     public var title: String
@@ -56,7 +56,7 @@ For example the images of an `ImageEntry`.
     /** If 'type' is 'TextEntry' then this is the text to be represented. */
     public var text: String?
 
-    public init(id: String, type: `Type`, title: String, template: String, customFields: [String: Any]? = nil, images: [String: URL]? = nil, item: ItemSummary? = nil, list: ItemList? = nil, people: [Person]? = nil, text: String? = nil) {
+    public init(id: String, type: _Type, title: String, template: String, customFields: [String: Any]? = nil, images: [String: URL]? = nil, item: ItemSummary? = nil, list: ItemList? = nil, people: [Person]? = nil, text: String? = nil) {
         self.id = id
         self.type = type
         self.title = title

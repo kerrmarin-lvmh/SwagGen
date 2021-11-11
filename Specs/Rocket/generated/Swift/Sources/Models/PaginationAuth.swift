@@ -8,7 +8,7 @@ import Foundation
 public class PaginationAuth: APIModel {
 
     /** The token type required to load the list. */
-    public enum `Type`: String, Codable, Equatable, CaseIterable {
+    public enum _Type: String, Codable, Equatable, CaseIterable {
         case userAccount = "UserAccount"
         case userProfile = "UserProfile"
     }
@@ -21,12 +21,12 @@ public class PaginationAuth: APIModel {
     }
 
     /** The token type required to load the list. */
-    public var type: `Type`
+    public var type: _Type
 
     /** The token scope required. */
     public var scope: Scope
 
-    public init(type: `Type`, scope: Scope) {
+    public init(type: _Type, scope: Scope) {
         self.type = type
         self.scope = scope
     }

@@ -27,9 +27,9 @@ public class ItemSchedule: APIModel {
     public var live: Bool?
 
     /** True if this has been aired previously on the same channel. */
-    public var `repeat`: Bool?
+    public var _repeat: Bool?
 
-    public init(id: String, channelId: String, startDate: DateTime, endDate: DateTime, featured: Bool? = nil, item: ItemSummary? = nil, live: Bool? = nil, `repeat`: Bool? = nil) {
+    public init(id: String, channelId: String, startDate: DateTime, endDate: DateTime, featured: Bool? = nil, item: ItemSummary? = nil, live: Bool? = nil, _repeat: Bool? = nil) {
         self.id = id
         self.channelId = channelId
         self.startDate = startDate
@@ -37,7 +37,7 @@ public class ItemSchedule: APIModel {
         self.featured = featured
         self.item = item
         self.live = live
-        self.`repeat` = `repeat`
+        self._repeat = _repeat
     }
 
     public required init(from decoder: Decoder) throws {
@@ -50,7 +50,7 @@ public class ItemSchedule: APIModel {
         featured = try container.decodeIfPresent("featured")
         item = try container.decodeIfPresent("item")
         live = try container.decodeIfPresent("live")
-        `repeat` = try container.decodeIfPresent("repeat")
+        _repeat = try container.decodeIfPresent("repeat")
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -63,7 +63,7 @@ public class ItemSchedule: APIModel {
         try container.encodeIfPresent(featured, forKey: "featured")
         try container.encodeIfPresent(item, forKey: "item")
         try container.encodeIfPresent(live, forKey: "live")
-        try container.encodeIfPresent(`repeat`, forKey: "repeat")
+        try container.encodeIfPresent(_repeat, forKey: "repeat")
     }
 
     public func isEqual(to object: Any?) -> Bool {
@@ -75,7 +75,7 @@ public class ItemSchedule: APIModel {
       guard self.featured == object.featured else { return false }
       guard self.item == object.item else { return false }
       guard self.live == object.live else { return false }
-      guard self.`repeat` == object.`repeat` else { return false }
+      guard self._repeat == object._repeat else { return false }
       return true
     }
 

@@ -154,7 +154,6 @@ To add support for a specific asynchronous library, just add an extension on `AP
 - **Cat**
 - **ChildWithNestedObject**
 - **Dog**
-- **ErrorType**
 - **ModelWithAdditionalProperties**
 - **ModelWithBooleanAdditionalProperties**
 - **ModelWithDefinitionAdditionalProperties**
@@ -170,6 +169,7 @@ To add support for a specific asynchronous library, just add an extension on `AP
 - **UserReference**
 - **UserSubclass**
 - **Zoo**
+- **_Error**
 
 ## Requests
 
